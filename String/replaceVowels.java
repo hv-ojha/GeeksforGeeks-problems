@@ -7,20 +7,23 @@ class replaceVowels {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int T = Integer.parseInt(br.readLine().trim());
         while(T-- > 0) {
-            StringBuilder str = new StringBuilder(br.readLine().trim());
+            StringBuffer str = new StringBuffer(br.readLine().trim());
             int start = 0;
-            int end = str.length();
+            int end = str.length()-1;
             while(start < end) {
                 if(!isVowel(str.charAt(start))) {
                     start++;
                     continue;
                 }
                 else if(!isVowel(str.charAt(end))) {
-                    end++;
+                    end--;
                     continue;
                 }
-                
+                char temp = str.charAt(start);
+                str.setCharAt(start++, str.charAt(end));
+                str.setCharAt(end--, temp);
             }
+            System.out.println(str);
         }
     }
     static boolean isVowel(char c) {
